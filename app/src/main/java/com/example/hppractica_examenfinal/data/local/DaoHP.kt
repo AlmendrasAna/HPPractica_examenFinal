@@ -9,7 +9,9 @@ import androidx.room.Query
 @Dao
 interface DaoHP {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertsListCharacterHP(productsListEntitys: List<CharacterEntity>)
+    suspend fun insertsListCharacterHP(listEntitys: List<CharacterEntity>)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertsOneCharacterHP(entity: CharacterEntity)
 
     @Query("select * from character_HP_table order by id ASC ")
     fun showListCharacterHP(): LiveData<List<CharacterEntity>>
