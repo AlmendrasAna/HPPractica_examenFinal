@@ -13,7 +13,7 @@ interface DaoHP {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertsOneCharacterHP(entity: CharacterEntity)
 
-    @Query("select * from character_HP_table order by id ASC ")
+    @Query("select * from character_HP_table order by name ASC ")
     fun showListCharacterHP(): LiveData<List<CharacterEntity>>
 
 }

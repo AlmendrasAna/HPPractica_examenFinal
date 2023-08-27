@@ -31,9 +31,8 @@ data class CharacterData(
     val gender: String,
     val house: String,
     val dateOfBirth: String,
-    val length :Int,
     val ancestry: String,
-    val core:String,
+    val patronus:String,
     val actor: String,
     val alive : Boolean,
     val image : String

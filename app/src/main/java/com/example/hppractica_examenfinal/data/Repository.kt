@@ -12,16 +12,22 @@ class Repository(private val apiHP: ApiHP, private val daoHP: DaoHP) {
 
     suspend fun loadAllCharacter() {
         try {
-
+            Log.e("lol", "antes response")
             val response = apiHP.getProductsData()
             if (response.isSuccessful) {
                 val bodyResponse = response.body()
-
+                Log.e("lol", "antesk response")
                 bodyResponse?.let { listData ->
-                    val listCharacterEntity = listData.map {data ->
-                        data.toCharacterEntity()
+                    Log.e("lol", "Error body"+listData.size.toString())
+                    listData.map {data ->
+                        Log.e("lol", "Error body"+data.toString())
+                        val dataEntity =data.toCharacterEntity()
+
+                        daoHP.insertsOneCharacterHP(dataEntity)
+
+
                     }
-                    daoHP.insertsListCharacterHP(listCharacterEntity)
+                    Log.e("lol", "Error bod,,,y")
                 }
             }
         } catch (exception: Exception) {
@@ -37,10 +43,9 @@ fun CharacterData.toCharacterEntity(): CharacterEntity = CharacterEntity(
     this.name,
     this.gender,
     this.house,
-    this.dateOfBirth,
-    this.length,
+    "",
     this.ancestry,
-    this.core,
+    this.patronus,
     this.actor,
     this.alive,
     this.image

@@ -7,7 +7,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 class RetrofitClientHP {
 
     companion object {
-        private const val URL_BASE = "https://hp-api.onrender.com/api/characters/"
+        private const val URL_BASE = "https://hp-api.onrender.com/api/"
 
         fun getRetrofitHP(): ApiHP {
             val mRetrofit = Retrofit.Builder()

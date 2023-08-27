@@ -1,4 +1,4 @@
-package com.example.hppractica_examenfinal.view.adapter
+package com.example.hppractica_examenfinal.view
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
