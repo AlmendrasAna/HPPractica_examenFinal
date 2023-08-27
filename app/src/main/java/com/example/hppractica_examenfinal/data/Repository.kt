@@ -16,17 +16,17 @@ class Repository(private val apiHP: ApiHP, private val daoHP: DaoHP) {
             val response = apiHP.getProductsData()
             if (response.isSuccessful) {
                 val bodyResponse = response.body()
-                Log.e("lol", "antesk response")
+               // Log.e("lol", "antesk response")
                 bodyResponse?.let { listData ->
-                    Log.e("lol", "Error body"+listData.size.toString())
-                    listData.map {data ->
-                        Log.e("lol", "Error body"+data.toString())
-                        val dataEntity =data.toCharacterEntity()
+                   // Log.e("lol", "Error body" + listData.size.toString())
+                    val listDataEntity = listData.map { data ->
+                  //      Log.e("lol", "Error body $data")
+                        data.toCharacterEntity()
 
-                        daoHP.insertsOneCharacterHP(dataEntity)
 
 
                     }
+                    daoHP.insertsListCharacterHP(listDataEntity)
                     Log.e("lol", "Error bod,,,y")
                 }
             }
@@ -43,10 +43,16 @@ fun CharacterData.toCharacterEntity(): CharacterEntity = CharacterEntity(
     this.name,
     this.gender,
     this.house,
-    "",
+    this.dateOfBirth.isNull(),
     this.ancestry,
     this.patronus,
     this.actor,
     this.alive,
     this.image
 )
+
+fun String?.isNull(): String {
+    val txt = this
+    if (txt.isNullOrEmpty()) {return "No Disponible"}
+    return txt
+}
