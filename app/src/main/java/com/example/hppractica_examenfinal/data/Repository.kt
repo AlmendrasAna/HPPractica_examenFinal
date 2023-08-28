@@ -16,13 +16,12 @@ class Repository(private val apiHP: ApiHP, private val daoHP: DaoHP) {
             val response = apiHP.getProductsData()
             if (response.isSuccessful) {
                 val bodyResponse = response.body()
-               // Log.e("lol", "antesk response")
+                // Log.e("lol", "antesk response")
                 bodyResponse?.let { listData ->
-                   // Log.e("lol", "Error body" + listData.size.toString())
+                    // Log.e("lol", "Error body" + listData.size.toString())
                     val listDataEntity = listData.map { data ->
-                  //      Log.e("lol", "Error body $data")
+                        //      Log.e("lol", "Error body $data")
                         data.toCharacterEntity()
-
 
 
                     }
@@ -40,19 +39,40 @@ class Repository(private val apiHP: ApiHP, private val daoHP: DaoHP) {
 
 fun CharacterData.toCharacterEntity(): CharacterEntity = CharacterEntity(
     this.id,
-    this.name,
-    this.gender,
-    this.house,
+    this.name.isNull(),
+    this.gender.isNull(),
+    this.house.isNull(),
     this.dateOfBirth.isNull(),
-    this.ancestry,
-    this.patronus,
-    this.actor,
+    this.ancestry.isNull(),
+
+    this.patronus.isNull(),
+    this.actor.isNull(),
     this.alive,
-    this.image
+    this.image,
+    this.wand.wood.isNull(),
+    this.wand.core.isNull(),
+    this.wand?.length
+
 )
 
+
+
+
+fun Double?.isDoubleNull():Double
+{
+    val num = this
+
+
+    if ( num.toString().isNullOrEmpty()) {
+
+        return 0.1
+    }
+    return num!!
+}
 fun String?.isNull(): String {
     val txt = this
-    if (txt.isNullOrEmpty()) {return "No Disponible"}
+    if (txt.isNullOrEmpty()) {
+        return "No Disponible"
+    }
     return txt
 }
